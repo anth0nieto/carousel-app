@@ -23,4 +23,4 @@ The project is based on [Expo CLI Quickstart](https://reactnative.dev/docs/0.61/
 
 ## Demo Video
 
-<img src="https://github.com/anth0nieto/carousel-app/blob/master/preview/demo.gif" width="400" height="400">
+<img src="https://github.com/anth0nieto/carousel-app/blob/master/preview/demo.gif" width="400" height="800">
