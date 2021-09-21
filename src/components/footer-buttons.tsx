@@ -42,7 +42,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({
           <MaterialIcons
             name="keyboard-arrow-left"
             size={ARROW_SIZE}
-            color="white"
+            color="black"
           />
         </View>
       </TouchableOpacity>
@@ -55,7 +55,7 @@ const FooterButtons: React.FC<FooterButtonsProps> = ({
           <MaterialIcons
             name="keyboard-arrow-right"
             size={ARROW_SIZE}
-            color="white"
+            color="black"
           />
         </View>
       </TouchableOpacity>

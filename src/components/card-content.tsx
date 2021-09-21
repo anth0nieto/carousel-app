@@ -5,6 +5,7 @@ import { Text, View, StyleSheet } from 'react-native';
 type CardContentProps = {
   title: string;
   description: string;
+  isPair: boolean;
 };
 
 const styles = StyleSheet.create({
@@ -26,14 +27,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const CardContent: React.FC<CardContentProps> = ({ title, description }) => {
+const CardContent: React.FC<CardContentProps> = ({
+  title,
+  description,
+  isPair,
+}) => {
   return (
     <>
-      <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
+      <Text
+        style={[styles.title, { color: isPair ? 'white' : 'black' }]}
+        numberOfLines={1}
+        adjustsFontSizeToFit
+      >
         {title}
       </Text>
       <View style={styles.descriptionContainer}>
-        <Text style={styles.description}>{description}</Text>
+        <Text
+          style={[styles.description, { color: isPair ? 'white' : 'black' }]}
+        >
+          {description}
+        </Text>
       </View>
     </>
   );

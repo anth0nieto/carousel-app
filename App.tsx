@@ -4,7 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { StatusBar } from 'expo-status-bar';
 import store from './src/store';
-import Main from './src/Main';
+import Main from './src/main';
 
 const persistor = persistStore(store);
 

@@ -14,13 +14,19 @@ import { RootState } from '@carousel/store/root-state';
 import { CardModel } from '@carousel/model';
 import { setIndex } from '@carousel/store/slice';
 import Card from './components/card';
-import { HEIGHT_SCREEN, DATA, WIDTH_SCREEN } from './constants';
+import {
+  HEIGHT_SCREEN,
+  DATA,
+  ITEM_WIDTH,
+  LEFT_SPACE,
+  RIGHT_SPACE,
+} from './constants';
 import FooterButtons from './components/footer-buttons';
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,
@@ -30,7 +36,7 @@ const styles = StyleSheet.create({
   flatListContainer: {
     flexGrow: 0,
   },
-  flatListContent: { height: HEIGHT_SCREEN * 0.5 },
+  flatListContent: { height: HEIGHT_SCREEN * 0.6 },
 });
 
 const Main: React.FC = () => {
@@ -56,7 +62,7 @@ const Main: React.FC = () => {
   const onHandlePressLeft = () => {
     setCurrentIndex(currentIndex - 1);
     flatlistRef?.current?.scrollToOffset({
-      offset: (currentIndex - 1) * WIDTH_SCREEN,
+      offset: (currentIndex - 1) * ITEM_WIDTH,
       animated: true,
     });
   };
@@ -70,13 +76,13 @@ const Main: React.FC = () => {
   };
 
   const onMomentumScrollEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    setCurrentIndex(Math.round(e.nativeEvent.contentOffset.x / WIDTH_SCREEN));
+    setCurrentIndex(Math.round(e.nativeEvent.contentOffset.x / ITEM_WIDTH));
   };
 
   const getItemLayout = (data, index: number) => ({
     index,
-    length: WIDTH_SCREEN,
-    offset: index * WIDTH_SCREEN,
+    length: ITEM_WIDTH,
+    offset: index * ITEM_WIDTH,
   });
 
   const renderItem = ({ item, index }) => (
@@ -89,11 +95,16 @@ const Main: React.FC = () => {
       <SafeAreaView style={styles.container}>
         <Animated.FlatList
           ref={flatlistRef}
-          data={DATA}
+          data={[
+            { key: LEFT_SPACE, image: '', title: '', description: '' },
+            ...DATA,
+            { key: RIGHT_SPACE, image: '', title: '', description: '' },
+          ]}
           keyExtractor={item => item.key}
           horizontal
           initialScrollIndex={currentIndex}
-          pagingEnabled
+          snapToInterval={ITEM_WIDTH}
+          decelerationRate={0}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { x: scrollX } } }],
             {

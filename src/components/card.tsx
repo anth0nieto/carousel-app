@@ -6,7 +6,10 @@ import {
   IMAGE_HEIGHT,
   IMAGE_WIDTH,
   SPACING,
-  WIDTH_SCREEN,
+  ITEM_WIDTH,
+  LEFT_SPACE,
+  RIGHT_SPACE,
+  SPACER_WIDTH,
 } from '@carousel/constants';
 
 type CardProps = {
@@ -14,22 +17,29 @@ type CardProps = {
   item: CardModel;
   scrollX: Animated.Value;
 };
-
 const styles = StyleSheet.create({
   root: {
-    width: WIDTH_SCREEN,
+    width: ITEM_WIDTH,
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     paddingVertical: SPACING,
   },
   cardContainer: {
     borderRadius: 10,
     paddingBottom: 10,
-    backgroundColor: 'white',
-    height: '100%',
+    height: '60%',
     width: IMAGE_WIDTH,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   cardImage: {
     width: IMAGE_WIDTH,
@@ -47,41 +57,57 @@ const styles = StyleSheet.create({
 });
 
 const Card: React.FC<CardProps> = ({ index, scrollX, item }) => {
+  const isPair = index % 2 === 0;
   const inputRange = [
-    (index - 1) * WIDTH_SCREEN,
-    index * WIDTH_SCREEN,
-    (index + 1) * WIDTH_SCREEN,
+    (index - 2) * IMAGE_WIDTH,
+    (index - 1) * IMAGE_WIDTH,
+    index * IMAGE_WIDTH,
   ];
   const opacity = scrollX.interpolate({
     inputRange,
-    outputRange: [0, 1, 0],
+    outputRange: [0.5, 1, 0.5],
   });
   const translateY = scrollX.interpolate({
     inputRange,
-    outputRange: [50, 0, 50],
+    outputRange: [0, -25, 0],
   });
 
   const inputRangeText = [
-    (index - 0.2) * WIDTH_SCREEN,
-    index * WIDTH_SCREEN,
-    (index + 0.2) * WIDTH_SCREEN,
+    (index - 0.2) * IMAGE_WIDTH,
+    index * IMAGE_WIDTH,
+    (index + 0.2) * IMAGE_WIDTH,
   ];
   const opacityText = scrollX.interpolate({
     inputRange: inputRangeText,
-    outputRange: [0, 1, 0],
+    outputRange: [1, 0, 1],
   });
+
+  if (item.key === LEFT_SPACE || item.key === RIGHT_SPACE) {
+    return <View style={{ width: SPACER_WIDTH }} />;
+  }
 
   return (
     <View style={styles.root}>
       <Animated.View
-        style={[styles.cardContainer, { opacity, transform: [{ translateY }] }]}
+        style={[
+          styles.cardContainer,
+          {
+            opacity,
+            transform: [{ translateY }],
+            backgroundColor: isPair ? 'black' : 'white',
+          },
+        ]}
       >
         <Image source={{ uri: item.image }} style={styles.cardImage} />
         <Animated.View
           key={item.key}
           style={[styles.cardText, { opacity: opacityText }]}
         >
-          <CardContent title={item.title} description={item.description} />
+          <CardContent
+            isPair={isPair}
+            title={item.title}
+            description={item.description}
+          />
         </Animated.View>
       </Animated.View>
     </View>
