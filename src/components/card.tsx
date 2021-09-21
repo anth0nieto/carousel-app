@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     borderRadius: 10,
-    paddingBottom: 10,
     height: '60%',
     width: IMAGE_WIDTH,
     alignItems: 'center',
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING,
     paddingHorizontal: SPACING * 2,
     zIndex: 99,
+    flex: 1,
   },
 });
 

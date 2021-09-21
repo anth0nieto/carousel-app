@@ -21,7 +21,7 @@ export const RANDOM_IMAGES = [
 export const LEFT_SPACE = 'left-space';
 export const RIGHT_SPACE = 'right-space';
 
-faker.seed(10);
+faker.seed(20);
 export const DATA = [...RANDOM_IMAGES].map(
   (image): CardModel => ({
     key: faker.random.uuid(),
