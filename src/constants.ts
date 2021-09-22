@@ -13,9 +13,12 @@ export const ITEM_WIDTH = Math.round(WIDTH_SCREEN * 0.6) + SPACING * 1.5;
 export const SPACER_WIDTH = (WIDTH_SCREEN - ITEM_WIDTH) / 2;
 
 export const RANDOM_IMAGES = [
-  'https://source.unsplash.com/300x300/?nature,water',
-  'https://source.unsplash.com/300x300/?developer,it',
-  'https://source.unsplash.com/300x300/?food,cakes',
+  'https://source.unsplash.com/300x300/?nature',
+  'https://source.unsplash.com/300x300/?water',
+  'https://source.unsplash.com/300x300/?developer',
+  'https://source.unsplash.com/300x300/?it',
+  'https://source.unsplash.com/300x300/?food',
+  'https://source.unsplash.com/300x300/?cakes',
 ];
 
 export const LEFT_SPACE = 'left-space';

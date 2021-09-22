@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
 const Card: React.FC<CardProps> = ({ index, scrollX, item }) => {
   const isPair = index % 2 === 0;
   const inputRange = [
-    (index - 2) * IMAGE_WIDTH,
-    (index - 1) * IMAGE_WIDTH,
-    index * IMAGE_WIDTH,
+    (index - 2) * ITEM_WIDTH,
+    (index - 1) * ITEM_WIDTH,
+    index * ITEM_WIDTH,
   ];
   const opacity = scrollX.interpolate({
     inputRange,
@@ -69,13 +69,13 @@ const Card: React.FC<CardProps> = ({ index, scrollX, item }) => {
   });
   const translateY = scrollX.interpolate({
     inputRange,
-    outputRange: [0, -25, 0],
+    outputRange: [0, -20, 0],
   });
 
   const inputRangeText = [
-    (index - 0.2) * IMAGE_WIDTH,
-    index * IMAGE_WIDTH,
-    (index + 0.2) * IMAGE_WIDTH,
+    (index - 0.2) * ITEM_WIDTH,
+    index * ITEM_WIDTH,
+    (index + 0.2) * ITEM_WIDTH,
   ];
   const opacityText = scrollX.interpolate({
     inputRange: inputRangeText,
